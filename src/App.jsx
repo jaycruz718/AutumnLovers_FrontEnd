@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import LoginSignup from './pages/LoginSignup';
 import AboutContact from './pages/AboutContact';
 import Events from './pages/Events';
+import EventDetail from './pages/EventDetail';
 import './App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/login" element={<LoginSignup />} />
         <Route path="/about" element={<AboutContact/>} />
         <Route path="/events" element={<Events />} />
+        <Route path="/events" element={<EventDetail />} />
       </Routes>
     </>
   );

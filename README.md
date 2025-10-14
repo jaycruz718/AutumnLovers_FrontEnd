@@ -1,4 +1,4 @@
-### Autumn's Lovers
+## Autumn's Lovers
 This is a website created for those who love this time of the year, Autumn and all the beautiful holidays that follow. 
 
 ## Winter Wonderland
