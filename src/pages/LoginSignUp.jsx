@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function LoginSignup() {
@@ -18,7 +19,7 @@ export default function LoginSignup() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Login or Sign Up</h2>
+      <h2>Log-In</h2>
       <input name="email" placeholder="Email" onChange={handleChange} required />
       <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
       <button type="submit">Continue</button>

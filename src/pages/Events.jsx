@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
-// import { getEvents, deleteEvent } from '../api/events';
+import axios from 'axios';
+import { getEvents, deleteEvent } from '../utilities/events';
 import { Link } from 'react-router-dom';
 
 export default function Events() {
   const [events, setEvents] = useState([]);
+
+  const API = '';
 
   useEffect(() => {
     getEvents().then(res => setEvents(res.data));

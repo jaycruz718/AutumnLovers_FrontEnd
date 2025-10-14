@@ -1,4 +1,11 @@
+import axios from "axios";
+// import { sendMessage } from '../utilities/contact';
+
 export default function AboutContact() {
+  const API = 'http://localhost:3000/api/contact';
+
+  //  const sendMessage = (data) => axios.post(API, data);
+
   return (
     <div>
       <h2>About Autumn Lovers</h2>
