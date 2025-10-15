@@ -1,0 +1,34 @@
+.video_wrap {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.video_wrap video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  color: white;
+}
+
+.video_wrap video div{
+  z-index: 1;
+  text-align: center;
+  max-width: 700px;
+}
+
+.video_wrap h1 {
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+}
+
+.video_wrap p {
+  text-align: center;
+  font-size: 22px;
+  color: white;
+}
