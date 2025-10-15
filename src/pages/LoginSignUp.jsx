@@ -1,28 +1,71 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useContext } from "react";
 
-export default function LoginSignup() {
-  const [form, setForm] = useState({ email: '', password: '' });
-  const navigate = useNavigate();
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+const LoginSignUp = () => {
+  const [isRegister, setIsRegister] = useState(false);
+  const { login } = useContext(AuthContext);
+  const [formData, setFormData] = useState({
+    userName: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Fake login
-    if (form.email && form.password) {
-      localStorage.setItem('user', form.email); // Simulate login
-      navigate('/');
+    try {
+      const response = isRegister
+        ? await registerUser(formData)
+        : await loginUser(formData);
+      login(response); // save token to context + localStorage
+    } catch (err) {
+      alert(err.response?.data?.errors?.[0]?.msg || "Something went wrong");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Log-In</h2>
-      <input name="email" placeholder="Email" onChange={handleChange} required />
-      <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
-      <button type="submit">Continue</button>
-    </form>
+    <div>
+      <h1>{isRegister ? "Sign Up" : "Login"}</h1>
+      <form onSubmit={handleSubmit}>
+        {isRegister && (
+          <input
+            type="text"
+            name="userName"
+            placeholder="Username"
+            onChange={handleChange}
+          />
+        )}
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={handleChange}
+        />
+        {isRegister && (
+          <input
+            type="password"
+            name="password2"
+            placeholder="Confirm Password"
+            onChange={handleChange}
+          />
+        )}
+        <button type="submit">{isRegister ? "Register" : "Login"}</button>
+      </form>
+      <button onClick={() => setIsRegister(!isRegister)}>
+        {isRegister ? "Have an account? Log in" : "New user? Sign up"}
+      </button>
+    </div>
   );
-}
+};
+
+export default LoginSignUp;
