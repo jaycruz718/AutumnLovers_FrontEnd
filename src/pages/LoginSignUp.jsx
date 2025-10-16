@@ -29,7 +29,7 @@ const LoginSignUp = () => {
   };
 
   return (
-    <div>
+    <div className="centered-container">
       <h1>{isRegister ? "Sign Up" : "Login"}</h1>
       <form onSubmit={handleSubmit}>
         {isRegister && (
