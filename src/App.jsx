@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import NavBar from './components/NavBar/NavBar';
-import VideoComponent from './components/VideoComponent';
+import MainLayout from './layouts/MainLayout';
 import './App.css';
 
 // Pages
@@ -17,14 +16,14 @@ function App() {
   return (
     <>
       <NavBar /> 
-      <VideoComponent /> 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginSignup />} />
-        <Route path="/about" element={<AboutContact/>} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/events" element={<EventDetail />} />
-        
+        <Route path="/" element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginSignup />} />
+          <Route path="/about" element={<AboutContact/>} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/events" element={<EventDetail />} />
+        </Route>
       </Routes>
     </>
   );
