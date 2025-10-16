@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import NavBar from './components/NavBar/NavBar';
 import MainLayout from './layouts/MainLayout';
 import './App.css';
 
@@ -22,7 +23,7 @@ function App() {
           <Route path="/login" element={<LoginSignup />} />
           <Route path="/about" element={<AboutContact/>} />
           <Route path="/events" element={<Events />} />
-          <Route path="/events" element={<EventDetail />} />
+          <Route path="/events/:id" element={<EventDetail />} />
         </Route>
       </Routes>
     </>

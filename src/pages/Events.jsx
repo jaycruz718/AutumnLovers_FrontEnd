@@ -1,34 +1,32 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { getEvents, deleteEvent } from '../utilities/events';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import EventCard from '../components/EventCard';
+
+const sampleEvents = [
+  {
+    id: "1",
+    title: "Fall Foliage Festival",
+    date: "2025-10-21",
+    description: "Join us for a weekend of music, food, and vibrant autumn colors.",
+    image: "/assets/events/fall-festival.jpg"
+  },
+  {
+    id: "2",
+    title: "Pumpkin Patch Party",
+    date: "2025-10-25",
+    description: "Bring the family for pumpkin picking, hayrides, and hot cider!",
+    image: "/assets/events/pumpkin-patch.jpg"
+  }
+];
 
 export default function Events() {
-  const [events, setEvents] = useState([]);
-
-  const API = '';
-
-  useEffect(() => {
-    getEvents().then(res => setEvents(res.data));
-  }, []);
-
-  const handleDelete = async (id) => {
-    await deleteEvent(id);
-    setEvents(events.filter(e => e.id !== id));
-  };
-
   return (
-    <div>
-      <h2>Autumn Events</h2>
-      <Link to="/events/new">+ Create Event</Link>
-      <ul>
-        {events.map(e => (
-          <li key={e.id}>
-            <Link to={`/events/${e.id}`}>{e.title}</Link>
-            <button onClick={() => handleDelete(e.id)}></button>
-          </li>
+    <div className="events-page">
+      <h1>Upcoming Events</h1>
+      <div className="event-list">
+        {sampleEvents.map(event => (
+          <EventCard key={event.id} event={event} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

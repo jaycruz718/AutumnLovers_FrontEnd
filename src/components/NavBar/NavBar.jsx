@@ -1,11 +1,9 @@
-
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import NavBar from './components/NavBar/NavBar';
 import './NavBar.css';
 
 export default function NavBar() {
-  const navigate = navigate();
-  const user = localStorage.getItem('user');
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const logout = () => {
     localStorage.removeItem('user');
@@ -22,7 +20,7 @@ export default function NavBar() {
 
         {user ? (
           <>
-            <li>Hello, {user}</li>
+            <li>Hello, {user.name}</li>
             <li><button onClick={logout}>Logout</button></li>
           </>
         ) : (

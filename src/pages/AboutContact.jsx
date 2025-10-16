@@ -1,5 +1,5 @@
 import axios from "axios";
-// import { sendMessage } from '../utilities/contact';
+//import { sendMessage } from '../utilities/contact';
 
 export default function AboutContact() {
   const API = 'http://localhost:3000/api/contact';
