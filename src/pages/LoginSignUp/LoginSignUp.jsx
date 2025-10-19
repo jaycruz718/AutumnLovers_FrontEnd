@@ -21,7 +21,6 @@ const LoginSignUp = () => {
       console.log(isRegister && formData.password !== formData.password2);
 
     if (isRegister && formData.password !== formData.password2) {
-      console.log(`Testing...`);
       alert("Passwords do not match");
       return;
     }

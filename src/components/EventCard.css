@@ -7,6 +7,7 @@
   background-color: white;
   transition: box-shadow 0.3s;
   max-width: 350px;
+  margin: 10px;
 }
 
 .event-card:hover {
@@ -37,4 +38,16 @@
   text-decoration: none;
   border-radius: 4px;
   font-weight: bold;
+  transition: background-color 0.3s ease;
 }
+
+.read-more-btn:hover {
+  background-color: white;
+}
+
+@media (max-width: 600px) {
+  .event-card {
+    max-width: 100%;
+  }
+}
+
