@@ -14,8 +14,7 @@ const EventCard = ({ event }) => {
         <p className="event-description">
           {description.length > 100 ? description.slice(0, 100) + '...' : description}
         </p>
-        {/* You can remove the Link if routing isn't needed */}
-        {/* <Link to={`/events/${id}`} className="read-more-btn">Read More</Link> */}
+        <button className="read-more-btn">Read More</button>
       </div>
     </div>
   );
