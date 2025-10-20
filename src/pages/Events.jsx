@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import EventCard from '../components/eventsParts/EventCard';
-import EventForm from '../components/eventsParts/EventForm'; // make sure this path is correct
+import EventForm from '../components/eventsParts/EventForm'; 
 import autumn1 from '../assets/events/autumn1.jpg';
 import autumn2 from '../assets/events/autumn2.jpg';
 
@@ -41,7 +41,7 @@ export default function Events() {
     <div className="events-page">
       <h1>Upcoming Events</h1>
 
-      {/* ✅ Show the form ONCE, at the top */}
+      {/* Show the form ONCE, at the top */}
       <EventForm onSubmit={handleNewEvent} />
 
       <div className="event-list">

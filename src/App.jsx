@@ -6,7 +6,7 @@ import './App.css';
 // Pages
 import Home from './pages/Home/Home';
 import LoginSignup from './pages/LoginSignUp/LoginSignUp';
-import AboutContact from './pages/AboutContact';
+import AboutContact from './pages/AboutContact/AboutContact';
 import Events from './pages/Events';
 import EventDetail from './pages/EventDetail';
 
