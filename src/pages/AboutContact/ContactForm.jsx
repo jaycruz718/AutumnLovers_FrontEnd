@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './AboutContact.css'; 
+import { sendContactForm } from '../../api/contact';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -13,14 +14,16 @@ const ContactForm = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // You can customize this logic to send data to an API, email service, etc.
-    console.log('Contact form submitted:', formData);
-
-    alert('Thanks for reaching out!');
-    setFormData({ name: '', email: '', message: '' });
+    try {
+      await sendContactForm(formData);
+      alert("Message sent!");
+      setFormData({ name: '', email: '', message: '' });
+    } catch (err) {
+      console.error(err);
+      alert("Failed to send message. Please try again.");
+    }
   };
 
   return (
