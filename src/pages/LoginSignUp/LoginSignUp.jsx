@@ -18,7 +18,6 @@ const LoginSignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-      console.log(isRegister && formData.password !== formData.password2);
 
     if (isRegister && formData.password !== formData.password2) {
       alert("Passwords do not match");
@@ -30,7 +29,7 @@ const LoginSignUp = () => {
         ? await registerUser(formData)
         : await loginUser(formData);
       login(response);
-    } catch (err) { console.log("Testing");
+    } catch (err) { 
       alert(err.response?.data?.errors?.[0]?.msg || "Something went wrong");
     }
   };

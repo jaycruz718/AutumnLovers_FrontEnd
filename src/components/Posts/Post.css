@@ -1,0 +1,37 @@
+.post {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.post-content img {
+  margin-top: 0.5rem;
+  border-radius: 4px;
+}
+
+.post-comments {
+  margin-top: 1rem;
+}
+
+.add-comment {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.comment {
+  margin-bottom: 0.5rem;
+}
+
+.comment-time {
+  font-size: 0.75rem;
+  color: gray;
+}

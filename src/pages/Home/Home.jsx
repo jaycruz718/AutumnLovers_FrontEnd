@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import videobg from "../../assets/Background1.mp4";
+import { AuthContext } from '../../context/AuthContext';
 import './Home.css';
 
 export default function Home() {
-  const user = localStorage.getItem('user');
+  const {user} = useContext(AuthContext);
 
   // Set your countdown target date here
   const targetDate = new Date("2025-10-31T00:00:00").getTime();
@@ -47,7 +48,7 @@ export default function Home() {
         Your browser does not support the video tag.
       </video>
       <div className="content">
-        <h1>Welcome{user ? `, ${user}` : ''}</h1>
+        <h1>Welcome{user ? `, ${user.userName}` : ''}</h1>
         <p>This is the Autumn Vibe</p>
 
         <div className="countdown">
