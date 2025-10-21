@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './EventForm.css'; // optional: for styling
+import './EventForm.css'; 
 
 const EventForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
