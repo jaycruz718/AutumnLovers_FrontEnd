@@ -22,7 +22,7 @@ export function AuthProvider({ children }) {
      
       const storedToken = localStorage.getItem('token');
     // const storedUser = localStorage.getItem('user');
-    console.log('Stored token:', storedToken);
+    // console.log('Stored token:', storedToken);
     if (storedToken) { // used to be storedUser
      getUser(storedToken); // used to be storedUser
     }

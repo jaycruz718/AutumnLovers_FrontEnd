@@ -2,10 +2,13 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import "../LoginSignUp/LoginSignUp.css";
 import { loginUser, registerUser } from "../../api/auth";
+import { useNavigate } from "react-router-dom";
 
 const LoginSignUp = () => {
   const [isRegister, setIsRegister] = useState(false);
   const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     userName: "",
     email: "",
@@ -29,6 +32,7 @@ const LoginSignUp = () => {
         ? await registerUser(formData)
         : await loginUser(formData);
       login(response);
+      navigate("/"); // Redirect user after Login/SignUp
     } catch (err) { 
       alert(err.response?.data?.errors?.[0]?.msg || "Something went wrong");
     }

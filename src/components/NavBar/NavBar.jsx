@@ -26,7 +26,7 @@ export default function NavBar() {
 
         {user ? (
           <>
-            <li>Hello, {user.name}</li>
+            <li>Hello, {user.name || user.userName || 'User'}</li>
             <li><button onClick={handleLogout}>Logout</button></li>
           </>
         ) : (
