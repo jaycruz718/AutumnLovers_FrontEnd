@@ -70,3 +70,30 @@
   gap: 10px;
   justify-content: center;
 }
+
+.timer span {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.timer span:hover {
+  transform: scale(1.1);
+  color: #facc15; /* lighter golden yellow */
+}
+
+@media (max-width: 600px) {
+  .video_wrap .content h1 {
+    font-size: 2.5rem;
+  }
+
+  .video_wrap .content p {
+    font-size: 1.2rem;
+  }
+
+  .countdown h2 {
+    font-size: 1.4rem;
+  }
+
+  .timer {
+    font-size: 1.5rem;
+  }
+}

@@ -1,15 +1,21 @@
+
 import React, { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import videobg from "../../assets/Background1.mp4";
 import { AuthContext } from '../../context/AuthContext';
 import './Home.css';
 
 export default function Home() {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  // Set your countdown target date here
   const targetDate = new Date("2025-10-31T00:00:00").getTime();
-
-  const [timeLeft, setTimeLeft] = useState({});
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     const updateCountdown = () => {
@@ -17,12 +23,7 @@ export default function Home() {
       const distance = targetDate - now;
 
       if (distance < 0) {
-        setTimeLeft({
-          days: 0,
-          hours: 0,
-          minutes: 0,
-          seconds: 0
-        });
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         return;
       }
 
@@ -35,11 +36,13 @@ export default function Home() {
     };
 
     const interval = setInterval(updateCountdown, 1000);
+    updateCountdown();
 
-    updateCountdown(); // Run once immediately
-
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval);
   }, [targetDate]);
+
+  const countdownEnded =
+    timeLeft.days + timeLeft.hours + timeLeft.minutes + timeLeft.seconds === 0;
 
   return (
     <div className="video_wrap">
@@ -53,13 +56,23 @@ export default function Home() {
 
         <div className="countdown">
           <h2>Countdown to HALLOWEEN</h2>
-          <div className="timer">
-            <span>{timeLeft.days}d</span> :
-            <span>{timeLeft.hours}h</span> :
-            <span>{timeLeft.minutes}m</span> :
-            <span>{timeLeft.seconds}s</span>
-          </div>
+          {!countdownEnded ? (
+            <div className="timer">
+              <span>{timeLeft.days}d</span> :
+              <span>{timeLeft.hours}h</span> :
+              <span>{timeLeft.minutes}m</span> :
+              <span>{timeLeft.seconds}s</span>
+            </div>
+          ) : (
+            <p>🎃 Happy Halloween! 🎃</p>
+          )}
         </div>
+
+        {user && (
+          <button className="join-btn" onClick={() => navigate('/events')}>
+            Join Halloween Event
+          </button>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,63 @@
+/* Comment.css */
+
+.comment {
+  background-color: #f0f2f5;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.comment-user {
+  font-weight: 600;
+  color: #333;
+}
+
+.comment-time {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.comment-text {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.4;
+}
+
+.add-comment {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.add-comment input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+.add-comment button {
+  padding: 0.5rem 1rem;
+  background-color: #4facfe;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-comment button:hover {
+  background-color: #00c6ff;
+}
+

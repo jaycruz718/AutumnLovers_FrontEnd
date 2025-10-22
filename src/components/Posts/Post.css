@@ -9,7 +9,7 @@
 .post-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .post-content img {
@@ -22,7 +22,7 @@
 }
 
 .add-comment {
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   display: flex;
   gap: 0.5rem;
 }
