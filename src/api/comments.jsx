@@ -1,9 +1,21 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3000/api/comment'; 
+const BASE_URL = 'http://localhost:3000/api/comments';
+
+/** Get comments for a specific post */
+export async function getComments(postId) {
+  const res = await axios.get(`${API_URL}/${postId}`);
+  return res.data;
+}
+
+// Add a comment to a post 
+export const addComments = async (postId, Text, user) => {
+  const res = await axios.post(API_URL, { postId, text, user});
+  return res.data;
+}
 
 /** Get all comments */
-export const getComment = async () => {
+export const getComments = async()=> {
   const response = await axios.get(BASE_URL);
   return response.data;
 };
