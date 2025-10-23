@@ -51,8 +51,8 @@ export default function Events() {
       const response = await createEvent(newEvent);
 
       // Spread exisiting events correctly
-      setEvents([response.data, ...prev]);
-    } catch (err) {
+      setEvents(previousEvents => [response.data, ...previousEvents]);
+      } catch (err) {
       console.error("Error creating event:", err);
     }
   };

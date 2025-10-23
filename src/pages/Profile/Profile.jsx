@@ -1,7 +1,7 @@
 // pages/ProfilePage.jsx
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import Post from '../../components/Posts/Post';
+//import Post from '../../components/Posts/Post';
 import PostForm from '../../components/Posts/PostForm';
 import { AuthContext } from '../../context/AuthContext';
 import './Profile.css';

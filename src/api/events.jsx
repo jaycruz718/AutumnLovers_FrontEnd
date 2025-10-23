@@ -17,7 +17,7 @@ export const getEvent = async (id) => {
 
 /** Create a new event */
 export const createEvent = async (eventData) => {
-  const response = await axios.post(BASE_URL, eventData);
+  const response = await axios.post('http://localhost:3000/api/events', eventData);
   return response.data;
 };
 

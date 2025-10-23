@@ -1,41 +1,48 @@
-import React, { useState } from 'react';
-import './EventForm.css'; 
+import React, { useState, useContext } from 'react';
+import './EventForm.css';
+import { AuthContext } from '../../context/AuthContext'; // Optional, if you want the logged-in user
 
 const EventForm = ({ onSubmit }) => {
+  const { user } = useContext(AuthContext) || {}; // Get logged-in user if available
   const [formData, setFormData] = useState({
     title: '',
     date: '',
     description: '',
-    image: ''
+    location: '',
+    image: '',
+    createdBy: '',
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.title || !formData.date || !formData.description) {
-      alert("Please fill in all required fields.");
+    if (!formData.title || !formData.date || !formData.description || !formData.location) {
+      alert('Please fill in all required fields.');
       return;
     }
 
-    // You can handle the event data here or pass it to a parent via props
-    if (onSubmit) {
-      onSubmit(formData);
-    }
+    const newEvent = {
+      ...formData,
+      createdBy: user?.userName || 'Guest', // ✅ matches backend schema
+    };
 
-    // Optional: reset the form
+    if (onSubmit) onSubmit(newEvent);
+
     setFormData({
       title: '',
       date: '',
       description: '',
-      image: ''
+      location: '',
+      image: '',
+      createdBy: '',
     });
   };
 
@@ -70,6 +77,17 @@ const EventForm = ({ onSubmit }) => {
         <textarea
           name="description"
           value={formData.description}
+          onChange={handleChange}
+          required
+        />
+      </label>
+
+      <label>
+        Location:
+        <input
+          type="text"
+          name="location"
+          value={formData.location}
           onChange={handleChange}
           required
         />
