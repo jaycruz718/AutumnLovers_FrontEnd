@@ -11,7 +11,73 @@ Users can register, log in, and share posts about their favorite autumn moments,
 - Events Section: Community events related to the season
 - Full REST API built with Express and MongoDB
 
+### Tech Stack
+Frontend
+- React (Vite)
+- React Router DOM
+- Axios
+- CSS (custom styling)
 
+Backend
+- Express.js
+- MongoDB + Mongoose
+- JWT Authentication
+- bcrypt.js (for password hashing)
+- dotenv & cors
+- Nodemon (for dev)
+
+### Project Structure
+Autumn-Lovers/
+├── client/                # Frontend (Vite + React)
+│   ├── src/
+│   │   ├── components/    # Reusable UI components (NavBar, PostForm, etc.)
+│   │   ├── context/       # AuthContext for global auth state
+│   │   ├── pages/         # Page components (Profile, Login, Events)
+│   │   ├── assets/        # Images and videos
+│   │   └── api/           # Axios API helpers
+│   ├── package.json
+│   └── vite.config.js
+│
+├── server/                # Backend (Express)
+│   ├── routes/            # Express routes (user, posts, comments, events)
+│   ├── models/            # Mongoose schemas
+│   ├── middleware/        # Custom middleware (auth, logger, error handler)
+│   ├── db/                # Database connection
+│   ├── server.js          # Express app entry point
+│   └── .env
+│
+└── README.md
+
+### API Endpoints
+
+| Method | Endpoint             | Description         |
+| ------ | -------------------- | ------------------- |
+| `POST` | `/api/user/register` | Register a new user |
+| `POST` | `/api/user/login`    | Log in a user       |
+| `GET`  | `/api/post`          | Get all posts       |
+| `POST` | `/api/post`          | Create a new post   |
+| `GET`  | `/api/events`        | Get all events      |
+
+
+### Environment Variables
+| Variable     | Description                |
+| ------------ | -------------------------- |
+| `MONGO_URI`  | MongoDB connection string  |
+| `JWT_SECRET` | Secret key for JWT signing |
+| `PORT`       | Backend server port        |
+
+### Future Improvements
+- Support image loads in posts
+- Dark / light theme toggle
+- Mobile-friendly design
+
+### Author
+Autumn Lovers was created by Jennifer Cruz Gaston
+***A cozy space for autumn enthusiasts to share their favorite moments***
+
+- Contact: jaycruz718@gmail.com
+- Porfolio: 
+- GitHub: https://github.com/jaycruz718
 
 ### Sources
 - https://pixabay.com
