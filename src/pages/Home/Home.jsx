@@ -64,7 +64,7 @@ export default function Home() {
               <span>{timeLeft.seconds}s</span>
             </div>
           ) : (
-            <p>🎃 Happy Halloween! 🎃</p>
+            <p>🎃 Happy Halloween!</p>
           )}
         </div>
 

@@ -69,19 +69,20 @@ Autumn-Lovers/
 | `PORT`       | Backend server port        |
 
 ### Future Improvements
-- Support image loads in posts
+- Support image and video loading in posts
 - Dark / light theme toggle
 - Mobile-friendly design
+- Shops Page (a part of the app that will connect people with local stores and businesses offering Halloween/Autumn services like cakes for parties.)
 
 ### Author
 Autumn Lovers was created by Jennifer Cruz Gaston
 ***A cozy space for autumn enthusiasts to share their favorite moments***
 
 - Contact: jaycruz718@gmail.com
-- Porfolio: 
 - GitHub: https://github.com/jaycruz718
 
 ### Sources
 - https://pixabay.com
 - https://wallpaper.com
+- google.com
 
