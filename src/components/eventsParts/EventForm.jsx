@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import './EventForm.css';
-import { AuthContext } from '../../context/AuthContext'; // Optional, if you want the logged-in user
+import { AuthContext } from '../../context/AuthContext'; 
 
 const EventForm = ({ onSubmit }) => {
-  const { user } = useContext(AuthContext) || {}; // Get logged-in user if available
+  const { user } = useContext(AuthContext) || {};
   const [formData, setFormData] = useState({
     title: '',
     date: '',

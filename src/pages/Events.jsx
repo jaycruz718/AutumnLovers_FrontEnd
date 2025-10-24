@@ -31,29 +31,47 @@ export default function Events() {
   }
   ]);
 
-  useEffect(() => {
-    async function fetchEvents() {
-      try {
-        const response = await getEvents();
-        const fetched = Array.isArray(response.data) ? response.data : [];
-        
-        // Merge backend events with example ones
-        setEvents(prev => [...prev, ...fetched]); 
-      } catch (err) {
-        console.error("Error fetching events:", err);
-      }
+ useEffect(() => {
+  async function fetchEvents() {
+    try {
+      const response = await getEvents();
+
+      // Handle all possible backend shapes safely
+      const fetched = Array.isArray(response?.data)
+        ? response.data
+        : Array.isArray(response?.data?.events)
+        ? response.data.events
+        : [];
+
+      // Merge only valid event objects
+      setEvents(prev => [...prev, ...fetched.filter(Boolean)]);
+    } catch (err) {
+      console.error("Error fetching events:", err);
     }
-    fetchEvents();
-  }, []);
+  }
+
+  fetchEvents();
+}, []);
+
+
 
   const handleNewEvent = async (newEvent) => {
     try {
       const response = await createEvent(newEvent);
+      const created = response?.data || newEvent;
+
+      const eventWithId = {
+        ...created,
+        id: created.id || created.id || Date.now().toString(),
+      };
 
       // Spread exisiting events correctly
-      setEvents(previousEvents => [response.data, ...previousEvents]);
+      setEvents(previousEvents => [eventWithId, ...previousEvents]);
       } catch (err) {
       console.error("Error creating event:", err);
+
+      const fallbackEvent = { ...newEvent, id: Date.now().toString() };
+      setEvents(previousEvents => [fallbackEvent, ...previousEvents]);
     }
   };
 
