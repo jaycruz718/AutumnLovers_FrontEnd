@@ -1,19 +1,29 @@
 // components/Posts/PostForm.jsx
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import './PostForm.css';
 
-export default function PostForm({ onSubmit }) {
+export default function PostForm({ onSubmit, onUpdate, existingPost }) {
   const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     title: '',
     content: '',
     tags: '',
   });
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  // Pre-fill form if editing
+  useEffect(() => {
+    if (existingPost) {
+      setFormData({
+        title: existingPost.title || '',
+        content: existingPost.content || '',
+        tags: existingPost.tags?.join(', ') || '',
+      });
+    }
+  }, [existingPost]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,22 +35,33 @@ export default function PostForm({ onSubmit }) {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:3000/api/post', {
+      const token = localStorage.getItem('token');
+      const payload = {
         title: formData.title,
         content: formData.content,
         tags: formData.tags.split(',').map(tag => tag.trim()),
-        author: user._id, // or user._id depending on your backend
-      }, {
-        headers: {
-          'x-auth-token': localStorage.getItem('token'),
-        }
-      });
+        author: user._id,
+      };
+
+      let res;
+      if (existingPost) {
+        // UPDATE existing post
+        res = await axios.put(`http://localhost:3000/api/post/${existingPost._id}`, payload, {
+          headers: { 'x-auth-token': token },
+        });
+        if (onUpdate) onUpdate(res.data);
+      } else {
+        // CREATE new post
+        res = await axios.post('http://localhost:3000/api/post', payload, {
+          headers: { 'x-auth-token': token },
+        });
+        if (onSubmit) onSubmit(res.data);
+      }
 
       setFormData({ title: '', content: '', tags: '' });
-      if (onSubmit) onSubmit(res.data); // callback to update post list
     } catch (err) {
-      console.error('Error creating post:', err);
-      setError(err.response?.data?.error || 'Failed to create post');
+      console.error('Error submitting post:', err);
+      setError(err.response?.data?.error || 'Failed to save post');
     } finally {
       setLoading(false);
     }
@@ -48,9 +69,9 @@ export default function PostForm({ onSubmit }) {
 
   return (
     <form className="post-form" onSubmit={handleSubmit}>
-      <h3>Create a New Post</h3>
+      <h3>{existingPost ? 'Edit Post' : 'Create a New Post'}</h3>
       {error && <p className="error">{error}</p>}
-      
+
       <input
         type="text"
         name="title"
@@ -59,7 +80,7 @@ export default function PostForm({ onSubmit }) {
         onChange={handleChange}
         required
       />
-      
+
       <textarea
         name="content"
         placeholder="Write your post..."
@@ -78,7 +99,7 @@ export default function PostForm({ onSubmit }) {
       />
 
       <button type="submit" disabled={loading}>
-        {loading ? 'Posting...' : 'Post'}
+        {loading ? 'Saving...' : existingPost ? 'Update Post' : 'Post'}
       </button>
     </form>
   );

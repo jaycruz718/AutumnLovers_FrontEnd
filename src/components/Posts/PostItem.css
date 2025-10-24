@@ -1,0 +1,18 @@
+.post-item .actions {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.post-item .actions button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.post-item .actions button:hover {
+  background-color: orange;
+}
