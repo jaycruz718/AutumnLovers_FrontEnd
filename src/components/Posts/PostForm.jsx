@@ -4,7 +4,7 @@ import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import './PostForm.css';
 
-export default function PostForm({ onPostCreated }) {
+export default function PostForm({ onSubmit }) {
   const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     title: '',
@@ -37,7 +37,7 @@ export default function PostForm({ onPostCreated }) {
       });
 
       setFormData({ title: '', content: '', tags: '' });
-      onPostCreated(res.data); // callback to update post list
+      if (onSubmit) onSubmit(res.data); // callback to update post list
     } catch (err) {
       console.error('Error creating post:', err);
       setError(err.response?.data?.error || 'Failed to create post');

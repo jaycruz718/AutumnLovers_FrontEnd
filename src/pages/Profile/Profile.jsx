@@ -1,7 +1,6 @@
 // pages/ProfilePage.jsx
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-//import Post from '../../components/Posts/Post';
 import PostForm from '../../components/Posts/PostForm';
 import { AuthContext } from '../../context/AuthContext';
 import './Profile.css';
@@ -67,16 +66,19 @@ const ProfilePage = () => {
       <h2>Your Posts</h2>
 
       {/* Post Creation Form */}
-      <PostForm onPostCreated={(newPost) => {
-        setPosts(prevPosts => [newPost, ...prevPosts]);
-      }} />
-
-      {/* Post List */}
+      <PostForm onSubmit={handleNewPost} />
+      
       {posts.length > 0 ? (
-        posts.map((post) => <Post key={post._id || post.id} post={post} />)
-      ) : (
-        <p>You haven’t posted anything yet.</p>
-      )}
+          posts.map((post) => (
+            <div key={post._id || post.id} className="post">
+              <h3>{post.title}</h3>
+              <p>{post.content}</p>
+            </div>
+  ))
+) : (
+  <p>You haven’t posted anything yet.</p>
+)}
+
     </div>
   );
 };
