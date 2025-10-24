@@ -2,6 +2,8 @@
 This is a website created for those who love this time of the year, Autumn and all the beautiful holidays that follow. It is a full-stack social web application built with React (Vite) on the frontend and Express/MongoDB on the backend.
 Users can register, log in, and share posts about their favorite autumn moments, events, and activities.
 
+## BackEnd Link: https://github.com/jaycruz718/AutumnLovers_BackEnd
+
 ### Features
 - User Authentication: Sign up and log in securely using JWT tokens.
 - Create Posts: Users can create, edit, and view their own posts
