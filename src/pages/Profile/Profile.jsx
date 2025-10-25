@@ -1,86 +1,69 @@
-// pages/ProfilePage.jsx
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import PostForm from '../../components/Posts/PostForm';
 import { AuthContext } from '../../context/AuthContext';
-import './Profile.css';
+import PostForm from '../../components/Posts/PostForm';
+import PostItem from '../../components/Posts/PostItems';
+import ProfileDetail from '../Profile/ProfileDetails'; // import the new component
 
-const ProfilePage = () => {
+export default function Profile() {
   const { user } = useContext(AuthContext);
-  const [posts, setPosts] = useState([]);
+  const [profileData, setProfileData] = useState(null);
+  const [userPosts, setUserPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      if (!user) return;
-
+    const fetchProfile = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/api/post', {
-          headers: {
-            'x-auth-token': localStorage.getItem('token'),
-          },
+        const res = await axios.get('http://localhost:3000/api/user/me', {
+          headers: { 'x-auth-token': localStorage.getItem('token') },
         });
+        setProfileData(res.data);
 
-        // Safely handles data structure
-        const postsArray = Array.isArray(res.data) ? res.data : res.data.posts || [];
-
-        // Filter posts that belong to this user
-        const userPosts = res.data.filter(post => post.author === user.id);
-        setPosts(res.data.posts || []); // note: use .posts if that's the correct key
-        setLoading(false);
+        const postsRes = await axios.get(`http://localhost:3000/api/post?author=${res.data._id}`);
+        setUserPosts(postsRes.data);
       } catch (err) {
-        console.error('Error fetching posts:', err);
-        setError('Failed to load posts');
+        console.error('Error loading profile or posts:', err);
+      } finally {
         setLoading(false);
       }
     };
 
-    fetchPosts();
+    if (user) fetchProfile();
   }, [user]);
 
-  // Add new post to start immediately after successful creation
+  if (loading) return <p>Loading profile...</p>;
+  if (!profileData) return <p>Could not load profile.</p>;
 
-  // If no user is logged in:
-  if(!user) {
-    return (
-      <div className="profile-page not-logged-in">
-        <div className="login-message">
-          <h2>Please Log in to view Your Profile</h2>
-            <p>You must be logged in to create or view your posts.</p>
-          
-          </div>     
-      </div>
-    )
-  }
-
-  if (loading) return <div className='profile-page'><p>Loading posts...</p></div>;
-  if (error) return <div className='profile-page'><p>{error}</p></div>;
-
-  const handleNewPost = (newPost) => {
-    setPosts((prevPosts) => [newPost, ...prevPosts]);
+  const handlePostCreated = (newPost) => {
+    setUserPosts([newPost, ...userPosts]);
   };
 
   return (
     <div className="profile-page">
-      <h2>Your Posts</h2>
+      <h2>My Profile</h2>
 
-      {/* Post Creation Form */}
-      <PostForm onSubmit={handleNewPost} />
-      
-      {posts.length > 0 ? (
-          posts.map((post) => (
-            <div key={post._id || post.id} className="post">
-              <h3>{post.title}</h3>
-              <p>{post.content}</p>
-            </div>
-  ))
-) : (
-  <p>You haven’t posted anything yet.</p>
-)}
+      {/* Profile details */}
+      <ProfileDetail user={{ ...profileData, posts: userPosts }} />
 
+      <h3>Create a New Post</h3>
+      <PostForm
+        authorId={profileData._id}
+        onSubmit={handlePostCreated} // callback to add new post to list
+      />
+
+      <h3>My Posts</h3>
+      {userPosts.length === 0 ? (
+        <p>No posts yet.</p>
+      ) : (
+        userPosts.map(post => (
+          <PostForm
+            key={post._id}
+            existingPost={post}       // pass post for editing
+            onUpdate={(updatedPost) => setUserPosts(userPosts.map(p => p._id === updatedPost._id ? updatedPost : p))}
+          />
+        ))
+      )}
     </div>
   );
-};
+}
 
-export default ProfilePage;
