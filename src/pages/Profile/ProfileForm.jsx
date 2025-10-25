@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../Profile/ProfileForm.css";
 
 export default function ProfileForm({ user, onSave }) {
     const [formData, setFormData] = useState({ 

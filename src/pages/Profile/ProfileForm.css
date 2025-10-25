@@ -1,0 +1,22 @@
+.profile-page {
+  max-width: 600px;
+  margin: 2rem auto;
+  font-family: sans-serif;
+}
+
+.profile-form label {
+  display: block;
+  margin-top: 1rem;
+}
+
+.profile-form input,
+.profile-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.profile-form button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+}

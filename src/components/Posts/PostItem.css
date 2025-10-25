@@ -1,0 +1,46 @@
+.post-item {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #fff;
+}
+
+.post-item h4 {
+  margin: 0 0 0.5rem;
+}
+
+.post-item p {
+  margin: 0.5rem 0;
+}
+
+.post-item small {
+  color: #666;
+}
+
+.post-actions {
+  margin-top: 0.75rem;
+}
+
+.post-actions button {
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.post-actions button:last-child {
+  background: #dc3545;
+}
+
+.post-actions button:hover {
+  opacity: 0.9;
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+}
