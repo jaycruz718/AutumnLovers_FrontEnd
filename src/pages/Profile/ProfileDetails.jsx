@@ -20,10 +20,13 @@ export default function ProfilePage({ user }) {
     <div className="profile-page">
       <h2>My Profile</h2>
       {isEditing ? (
-        <ProfileForm user={currentUser} onSave={handleSave} />
+        <>
+          <ProfileForm user={currentUser} onSave={handleSave} />
+          <button onClick={() => setIsEditing(false)}>Cancel</button>
+        </>
       ) : (
         <>
-          <ProfileDetail user={currentUser} />
+          <ProfileDetails user={currentUser} />
           <button onClick={() => setIsEditing(true)}>Edit Profile</button>
         </>
       )}

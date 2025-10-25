@@ -1,10 +1,9 @@
-
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 import PostForm from "../../components/Posts/PostForm";
-import PostItem from "../../components/Posts/PostItems";
-import ProfileDetail from "../Profile/ProfileDetail";
+import PostItem from "../../components/Posts/PostItem";
+import ProfileDetails from "../Profile/ProfileDetails";
 import ProfileForm from "../Profile/ProfileForm";
 
 export default function Profile() {
@@ -17,8 +16,11 @@ export default function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
+        const token = localStorage.getItem("token");
+        if (!token) throw new Error("No token found");
+
         const res = await axios.get("http://localhost:3000/api/user/me", {
-          headers: { "x-auth-token": localStorage.getItem("token") },
+          headers: { "x-auth-token": token },
         });
         setProfileData(res.data);
 
@@ -27,7 +29,7 @@ export default function Profile() {
         );
         setUserPosts(postsRes.data);
       } catch (err) {
-        console.error("Error loading profile or posts:", err);
+        console.error("Error loading profile or posts:", err.response || err.message);
       } finally {
         setLoading(false);
       }
@@ -36,13 +38,14 @@ export default function Profile() {
     if (user) fetchProfile();
   }, [user]);
 
-  if (loading)
-  return (
-    <div className="loader">
-      <div className="spinner" />
-      <p>Loading your profile...</p>
-    </div>
-  );
+  if (loading) {
+    return (
+      <div className="loader">
+        <div className="spinner" />
+        <p>Loading your profile...</p>
+      </div>
+    );
+  }
 
   if (!profileData) return <p>Could not load profile.</p>;
 
@@ -53,7 +56,7 @@ export default function Profile() {
   const handleProfileSave = async (updatedData) => {
     try {
       const res = await axios.put(
-        `http://localhost:3000/api/user/${profileData._id}`,
+        `http://localhost:3000/api/user/me`,
         updatedData,
         {
           headers: { "x-auth-token": localStorage.getItem("token") },
@@ -73,12 +76,11 @@ export default function Profile() {
       {isEditing ? (
         <ProfileForm user={profileData} onSave={handleProfileSave} />
       ) : (
-        <ProfileDetail user={{ ...profileData, posts: userPosts }} />
+        <>
+          <ProfileDetails user={{ ...profileData, posts: userPosts }} />
+          <button onClick={() => setIsEditing(true)}>Edit Profile</button>
+        </>
       )}
-
-      <button onClick={() => setIsEditing(!isEditing)}>
-        {isEditing ? "Cancel" : "Edit Profile"}
-      </button>
 
       <h3>Create a New Post</h3>
       <PostForm authorId={profileData._id} onSubmit={handlePostCreated} />

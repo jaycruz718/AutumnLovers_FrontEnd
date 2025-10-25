@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../Posts/PostItems.css";
 import axios from "axios";
+import "../Posts/PostItem.css";
 
 export default function PostItem({ post, onUpdate, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
