@@ -68,7 +68,8 @@ export default function Profile() {
     return (
       <div className="not-logged-in">
         <div className="login-message">
-          <h2>Loading user info...</h2>
+          <h2>Please Log In to View Profile</h2>
+          <p>Come inside we have snacks and black cats!</p>
         </div>
       </div>
     );
@@ -77,7 +78,7 @@ export default function Profile() {
   if (loading) {
     return (
       <div className="profile-page">
-        <h2>Loading profile...</h2>
+        <h2>Loading Profile...</h2>
       </div>
     );
   }
