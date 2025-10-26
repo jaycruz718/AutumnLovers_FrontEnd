@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import './EventForm.css';
+import '../../components/eventsParts/EventForm.css';
 import { AuthContext } from '../../context/AuthContext'; 
 
 const EventForm = ({ onSubmit }) => {

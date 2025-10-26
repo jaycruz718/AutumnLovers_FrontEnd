@@ -1,74 +1,123 @@
-.event-card {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: white;
-  transition: box-shadow 0.3s;
-  max-width: 350px;
-  margin: 10px;
+/* Root colors for easy customization */
+:root {
+  --primary-color: #ff6f00;
+  --primary-hover: #e65c00;
+  --bg-color: #fff;
+  --text-color: #333;
+  --card-radius: 12px;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --gradient-start: #ffe0b2;
+  --gradient-end: #ffcc80;
 }
 
-.event-list {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 40px;
-  box-sizing: border-box;
-}
-
+/* EVENTS PAGE BACKGROUND */
 .events-page {
   background-image: url('../../assets/events/halloween2.jpg'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh; /* ensures full-page background */
+  min-height: 100vh;
   padding: 40px;
   box-sizing: border-box;
 }
 
-.event-card:hover {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* EVENT LIST CONTAINER */
+.event-list {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
+/* EVENT CARD */
+.event-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  max-width: 350px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.event-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.05);
+}
+
+/* EVENT IMAGE */
 .event-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  border-bottom: 2px solid rgba(255, 111, 0, 0.4);
+  transition: transform 0.3s ease;
 }
 
+.event-card:hover .event-image {
+  transform: scale(1.05);
+}
+
+/* EVENT DETAILS */
 .event-details {
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.event-details h2 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 1.25rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .event-date {
-  color: #888;
-  font-size: 14px;
+  color: #555;
+  font-size: 0.9rem;
+  font-style: italic;
 }
 
+.event-description {
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* BUTTONS */
 .read-more-btn {
   display: inline-block;
   margin-top: 10px;
-  padding: 8px 12px;
-  background-color: #ff6f00;
+  padding: 8px 14px;
+  background-color: var(--primary-color);
   color: white;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 6px;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .read-more-btn:hover {
-  background-color: white;
-  color: #ff6f00;
-  border: 1px solid #ff6f00;
+  background-color: var(--primary-hover);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
 }
 
+/* RESPONSIVE */
 @media (max-width: 600px) {
   .event-card {
     max-width: 100%;
+  }
+
+  .event-image {
+    height: 160px;
   }
 }
