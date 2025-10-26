@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
-import './PostForm.css';
+import '../Posts/PostForm.css';
 
 export default function PostForm({ onSubmit, onUpdate, existingPost }) {
   const { user } = useContext(AuthContext);
@@ -24,6 +24,10 @@ export default function PostForm({ onSubmit, onUpdate, existingPost }) {
       });
     }
   }, [existingPost]);
+
+  if (!user) {
+    return <p>Loading user info...</p>;
+  }
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

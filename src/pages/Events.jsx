@@ -12,7 +12,7 @@ export default function Events() {
     id: "1",
     title: "Fall Foliage Festival",
     date: "2025-10-21",
-    description: "Join us for a weekend of music, food, and vibrant autumn colors.",
+    description: "Join us for a weekend of music, food, and vibrant autumn colors. We will be giving away awesome prizes for the best costumes! Event starts at 5pm.",
     image: autumn1
   },
   {
@@ -31,48 +31,40 @@ export default function Events() {
   }
   ]);
 
- useEffect(() => {
-  async function fetchEvents() {
-    try {
-      const response = await getEvents();
-
-      // Handle all possible backend shapes safely
-      const fetched = Array.isArray(response?.data)
-        ? response.data
-        : Array.isArray(response?.data?.events)
-        ? response.data.events
-        : [];
-
-      // Merge only valid event objects
-      setEvents(prev => [...prev, ...fetched.filter(Boolean)]);
-    } catch (err) {
-      console.error("Error fetching events:", err);
+  useEffect(() => {
+    async function fetchEvents() {
+      try {
+        const response = await getEvents();
+        const fetched = Array.isArray(response?.data)
+          ? response.data
+          : Array.isArray(response?.data?.events)
+          ? response.data.events
+          : [];
+        setEvents(prev => [...prev, ...fetched.filter(Boolean)]);
+      } catch (err) {
+        console.error("Error fetching events:", err);
+      }
     }
-  }
 
-  fetchEvents();
-}, []);
-
-
+    fetchEvents();
+  }, []);
 
   const handleNewEvent = async (newEvent) => {
     try {
       const response = await createEvent(newEvent);
       const created = response?.data || newEvent;
-
-      const eventWithId = {
-        ...created,
-        id: created.id || created.id || Date.now().toString(),
-      };
-
-      // Spread exisiting events correctly
-      setEvents(previousEvents => [eventWithId, ...previousEvents]);
-      } catch (err) {
+      const eventWithId = { ...created, id: created.id || Date.now().toString() };
+      setEvents(prev => [eventWithId, ...prev]);
+    } catch (err) {
       console.error("Error creating event:", err);
-
       const fallbackEvent = { ...newEvent, id: Date.now().toString() };
-      setEvents(previousEvents => [fallbackEvent, ...previousEvents]);
+      setEvents(prev => [fallbackEvent, ...prev]);
     }
+  };
+
+  // <-- Move this outside handleNewEvent
+  const handleDeleteEvent = (id) => {
+    setEvents(prevEvents => prevEvents.filter(e => e._id !== id));
   };
 
   return (
@@ -80,8 +72,8 @@ export default function Events() {
       <h1>Upcoming Events</h1>
       <EventForm onSubmit={handleNewEvent} />
       <div className="event-list">
-        {Array.isArray(events) && events.map(event => (
-          <EventCard key={event.id || event._id} event={event} />
+        {events.map(event => (
+          <EventCard key={event._id || event.id} event={event} onDelete={handleDeleteEvent} />
         ))}
       </div>
     </div>

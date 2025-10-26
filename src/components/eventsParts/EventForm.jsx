@@ -31,7 +31,7 @@ const EventForm = ({ onSubmit }) => {
 
     const newEvent = {
       ...formData,
-      createdBy: user?.userName || 'Guest', // ✅ matches backend schema
+      createdBy: user?.userName || 'Guest', // matches backend schema
     };
 
     if (onSubmit) onSubmit(newEvent);
