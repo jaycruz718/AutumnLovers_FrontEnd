@@ -1,46 +1,89 @@
+/* PostItem.css */
+
 .post-item {
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  background-color: #fff;
+  background: linear-gradient(135deg, #e7e2da, #f09309); /* warm gradient */
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.post-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .post-item h4 {
   margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  color: white;
 }
 
 .post-item p {
   margin: 0.5rem 0;
+  line-height: 1.5;
+  color: #333;
 }
 
 .post-item small {
-  color: #666;
+  color: #555;
+  font-size: 0.85rem;
+  display: block;
+  margin-top: 0.5rem;
 }
 
 .post-actions {
-  margin-top: 0.75rem;
+  margin-top: 1rem;
+  display: flex;
+  gap: 10px;
 }
 
 .post-actions button {
-  margin-right: 0.5rem;
-  padding: 0.4rem 0.8rem;
-  background: orange;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
   border: none;
-  border-radius: 4px;
-  color: white;
   cursor: pointer;
+  font-weight: bold;
+  color: white;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.post-actions button:first-child {
+  background: #ff6f00; /* orange save/edit */
 }
 
 .post-actions button:last-child {
-  background: #dc3545;
+  background: #dc3545; /* red delete/cancel */
 }
 
 .post-actions button:hover {
-  opacity: 0.9;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+}
+
+.edit-mode input,
+.edit-mode textarea {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.edit-mode input:focus,
+.edit-mode textarea:focus {
+  border-color: #ff6f00;
+  outline: none;
 }
 
 .error {
-  color: red;
+  color: #dc3545;
   font-size: 0.9rem;
+  margin-top: 0.5rem;
 }
+

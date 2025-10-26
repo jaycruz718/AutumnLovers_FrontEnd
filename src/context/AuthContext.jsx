@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
       let response = await axios.get('http://localhost:3000/api/user/me', {
         headers: { "x-auth-token": token },
       });
-      setUser({ ...response.data, user });
+      setUser({ ...response.data, token });
     } catch (err) {
       console.error('Failed to fetch user:', err);
       logout();

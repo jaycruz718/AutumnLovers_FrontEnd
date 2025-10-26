@@ -9,12 +9,12 @@
   background-position: center;
   min-height: 100vh;
   padding: 2rem;
-  color: white; /* optional for contrast */
+  color: gold;
   text-align: center;
 }
 
 .profile-info {
-  margin-bottom: 2rem;
+  margin-bottom: 4em;
 }
 
 .profile-info p {
